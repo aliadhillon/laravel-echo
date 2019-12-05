@@ -31,7 +31,7 @@
     <div class="media" style="margin-top:20px;" v-for="comment in comments">
       <div class="media-left">
         <a href="#">
-          <img class="media-object mr-3" src="{{ asset('storage/user.jpg') }}" alt="...">
+          <img class="media-object mr-3" src="https://www.gstatic.com/webp/gallery/2.jpg" height="100" width="150" alt="...">
         </a>
       </div>
       <div class="media-body">
