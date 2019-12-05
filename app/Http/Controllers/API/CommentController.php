@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\NewComment;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -27,6 +28,9 @@ class CommentController extends Controller
         ]);
         
         $comment->load('user');
+
+        event(new NewComment($comment));
+
         return $comment->toJson();
     }
 }
