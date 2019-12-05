@@ -17,10 +17,15 @@
     <hr />
 
     <h3>Comments:</h3>
-    <div style="margin-bottom:50px;">
-      <textarea class="form-control" rows="3" name="body" placeholder="Leave a comment" v-model="commentBox"></textarea>
-      <button class="btn btn-success" style="margin-top:10px" @click.prevent="postComment()">Save Comment</button>
-    </div>
+    @auth
+        <div style="margin-bottom:50px;">
+        <textarea class="form-control" rows="3" name="body" placeholder="Leave a comment" v-model="commentBox"></textarea>
+        <button class="btn btn-success" style="margin-top:10px" @click.prevent="postComment()">Post Comment</button>
+        </div>
+    @else
+        <p>You must login to post a comment here.</p>
+        <a href="{{ route('login') }}">Login Now>>></a>
+    @endauth
 
 
     <div class="media" style="margin-top:20px;" v-for="comment in comments">
@@ -49,7 +54,7 @@
                 comments: {},
                 commentBox: '',
                 post: {!! $post->toJson() !!},
-                user: {!! Auth::check() ? Auth::user()->toJson() : null !!}
+                user: {!! Auth::check() ? Auth::user()->toJson() : 'null' !!}
             },
             mounted(){
                 this.getComments();
