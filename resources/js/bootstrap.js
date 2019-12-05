@@ -23,6 +23,25 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+// create a new axios instance
+const instance = axios.create({
+    baseURL: '/api'
+})
+
+// before a request is made start the nprogress
+instance.interceptors.request.use(config => {
+    NProgress.start()
+    return config
+})
+
+// before a response is returned stop nprogress
+instance.interceptors.response.use(response => {
+    NProgress.done()
+    return response
+})
+
+export default instance
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

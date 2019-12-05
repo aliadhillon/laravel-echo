@@ -59139,7 +59139,7 @@ Vue.config.productionTip = false;
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59166,7 +59166,22 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // create a new axios instance
+
+var instance = axios.create({
+  baseURL: '/api'
+}); // before a request is made start the nprogress
+
+instance.interceptors.request.use(function (config) {
+  NProgress.start();
+  return config;
+}); // before a response is returned stop nprogress
+
+instance.interceptors.response.use(function (response) {
+  NProgress.done();
+  return response;
+});
+/* harmony default export */ __webpack_exports__["default"] = (instance);
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

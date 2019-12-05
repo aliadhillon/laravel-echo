@@ -37,11 +37,11 @@ class NewComment implements ShouldBroadcastNow
         return new Channel('post.' . $this->comment->post->id);
     }
 
-    public function broadcaseWith()
+    public function broadcastWith()
     {
         return [
-            'body' => $comment->body,
-            'created_at' => $this->comment->created_at,
+            'body' => $this->comment->body,
+            'created_at' => $this->comment->created_at->toDateTimeString(),
             'user'=> [
                 'name' => $this->comment->user->name,
                 'avatar' => asset('storage/user.jpg')

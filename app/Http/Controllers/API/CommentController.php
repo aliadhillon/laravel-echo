@@ -29,7 +29,7 @@ class CommentController extends Controller
         
         $comment->load('user');
 
-        event(new NewComment($comment));
+        broadcast(new NewComment($comment))->toOthers();
 
         return $comment->toJson();
     }
