@@ -9,6 +9,7 @@
     @else
       <span class="bg-primary text-light pl-1 pr-1 ml-1 rounded">Draft</span>
     @endif
+    <span class="float-right">By: <strong>{{ $post->user->name }}</strong> </span>
     <hr />
     <p class="lead">
       {{ $post->content }}
@@ -84,7 +85,7 @@
                     })
                 },
                 listen() {
-                    Echo.channel(`post.${this.post.id}`)
+                    Echo.private(`post.${this.post.id}`)
                         .listen('NewComment', (comment) => {
                             this.comments.unshift(comment);
                             // alert(JSON.stringify(comment));

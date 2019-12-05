@@ -11,6 +11,12 @@
 |
 */
 
+use App\Post;
+
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('post.{id}', function ($user, $id) {
+    return (int) $user->id === (int) Post::find($id)->user_id;
 });
