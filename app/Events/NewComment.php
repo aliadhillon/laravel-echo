@@ -43,8 +43,7 @@ class NewComment implements ShouldBroadcast
             'body' => $this->comment->body,
             'created_at' => $this->comment->created_at->toDateTimeString(),
             'user'=> [
-                'name' => $this->comment->user->name,
-                'avatar' => asset('storage/user.jpg')
+                'name' => $this->comment->user->name
             ]
         ];
     }
